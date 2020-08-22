@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <directoryProjectGenerator implementation="rust.embd.project.Generator"/>
+    </extensions>
+</idea-plugin>
