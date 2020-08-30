@@ -1,6 +1,6 @@
 <idea-plugin>
   <id>nexos.rust.embd</id>
-  <name>rust embedded IDE</name>
+  <name>Rust Embedded IDE</name>
   <vendor email="bernd@dutkow.ski" url="https://github.com/nexoscp/">neXos</vendor>
 
   <description><![CDATA[
@@ -9,19 +9,13 @@
 
   <change-notes><![CDATA[ ]]></change-notes>
 
-   <!-- https://github.com/intellij-rust/intellij-rust/blob/644ccbe3e7f4e738d1963d5b8341ec746fdd2066/plugin/src/main/resources/META-INF/plugin.xml -->
+  <depends>com.intellij.modules.platform</depends>
   <depends>org.rust.lang</depends>
-
-  <!-- https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000738670/comments/115000613284 -->
   <depends optional="true" config-file="clion.xml">com.intellij.modules.clion</depends>
+  <depends optional="true" config-file="intellij.xml">com.intellij.modules.java</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000055950-how-can-you-add-items-to-CLion-s-New-Project-window -->
-    <!-- moduleBuilder builderClass="platformio.module.Builder" / -->
+    <moduleType id="rust:embd" implementationClass="rust.embd.module.Type"/>
+    <toolWindow id="Console" anchor="bottom" factoryClass="rust.embd.toolwindow.console.Factory"/>
   </extensions>
-
-  <actions>
-    <!-- Add your actions here -->
-  </actions>
-
 </idea-plugin>

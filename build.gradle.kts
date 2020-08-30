@@ -15,30 +15,36 @@ repositories {
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlinx","kotlinx-coroutines-core", "1.3.2")
-  implementation( "com.beust", "klaxon", "5.0.13")
-  testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.5.2")
-  testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.5.2")
-  testCompile("org.assertj", "assertj-swing-junit","3.9.2")
-  testCompile("org.hamcrest","hamcrest-all","1.3")
-  testCompile("org.mockito", "mockito-junit-jupiter", "3.2.0")
+  testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.6.2")
+  testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.2")
+  implementation(kotlin("stdlib-jdk8"))
 }
 
 plugins {
-  kotlin("jvm") version "1.3.61"
+  java
+  kotlin("jvm") version "1.3.72"
   id("org.jetbrains.intellij") version "0.4.21"
 }
+
+tasks.withType<JavaCompile> {
+  sourceCompatibility = "1.8"
+  targetCompatibility = "1.8"
+}
+
+// compile bytecode to java 8 (default is java 6)
+tasks.withType<KotlinCompile> {
+  kotlinOptions {
+    jvmTarget = "1.8"
+    freeCompilerArgs = listOf("-XXLanguage:+InlineClasses")
+  }
+}
+
+val ide :String by project
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
   version = "2020.2"
-  type = "CL"
-  setPlugins("org.toml.lang:0.2.128.3278-202", "org.rust.lang:0.3.128.3278-202")
+  type = ide
+  setPlugins("org.toml.lang:0.2.129.3308-202", "org.rust.lang:0.3.129.3308-202", "java") //FIXME only 'java' for ide = IC or UC
   downloadSources = true
 }
-
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-  freeCompilerArgs = listOf("-XXLanguage:+InlineClasses")
-}
-
