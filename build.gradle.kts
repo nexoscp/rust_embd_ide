@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotlin.collections.mutableListOf
 
 group = "rust"
 
@@ -18,6 +19,8 @@ dependencies {
   testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.6.2")
   testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.2")
   implementation(kotlin("stdlib-jdk8"))
+  implementation("org.usb4java:usb4java:1.3.0")
+  implementation("org.usb4java:usb4java-javax:1.3.0")
 }
 
 plugins {
@@ -41,10 +44,15 @@ tasks.withType<KotlinCompile> {
 
 val ide :String by project
 
+val pluginsX = mutableListOf("org.toml.lang:0.2.129.3308-202", "org.rust.lang:0.3.129.3308-202")
+if(ide in listOf("IC")) {
+  pluginsX.add("java")
+}
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
   version = "2020.2"
   type = ide
-  setPlugins("org.toml.lang:0.2.129.3308-202", "org.rust.lang:0.3.129.3308-202", "java") //FIXME only 'java' for ide = IC or UC
+  setPlugins("org.toml.lang:0.2.129.3308-202", "org.rust.lang:0.3.129.3308-202")
   downloadSources = true
 }
