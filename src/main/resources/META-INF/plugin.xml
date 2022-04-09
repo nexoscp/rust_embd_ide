@@ -11,6 +11,7 @@
 
   <depends>com.intellij.modules.platform</depends>
   <depends>org.rust.lang</depends>
+  <depends>org.toml.lang</depends>
   <depends optional="true" config-file="clion.xml">com.intellij.modules.clion</depends>
   <depends optional="true" config-file="intellij.xml">com.intellij.modules.java</depends>
 
