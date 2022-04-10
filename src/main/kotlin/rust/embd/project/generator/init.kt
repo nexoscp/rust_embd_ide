@@ -88,9 +88,9 @@ class Init(
                         .makeDirectory(this, "src")
                         .findOrCreateChildData(this, "main.rs")
                         .getOutputStream(this)
-                        ?.bufferedWriter()
+                        .bufferedWriter()
                         .use {
-                            it?.write("""
+                            it.write("""
                     #![no_std]
                     use cortex_m::asm;
                     use cortex_m_rt::entry;
@@ -116,9 +116,9 @@ class Init(
                         .makeDirectory(this, ".cargo")
                         .findOrCreateChildData(this, "config.toml")
                         .getOutputStream(this)
-                        ?.bufferedWriter()
+                        .bufferedWriter()
                         .use {
-                            it?.write("""
+                            it.write("""
                     [target.thumbv7em-none-eabi]
                     runner = "probe-run --chip nRF52840_xxAA"
 
