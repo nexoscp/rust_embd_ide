@@ -23,11 +23,11 @@ class USBTest {
     }
 
     private fun traverse(hub:UsbHub) {
-        (hub.attachedUsbDevices as List<UsbDevice>)
+        (hub.attachedUsbDevices)
                 .forEach { device ->
             if (device is UsbHub) {
                 traverse(device)
-            } else {
+            } else if(device is UsbDevice) {
                 val description = device.usbDeviceDescriptor
                 val vendorID = description.idVendor()
                 val productID = description.idProduct()

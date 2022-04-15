@@ -4,17 +4,25 @@
   <vendor email="bernd@dutkow.ski" url="https://github.com/nexoscp/">neXos</vendor>
 
   <description><![CDATA[
-      Rust Embedded
+      Rust Embedded IDE with support for probe.rs and other.
     ]]></description>
 
   <change-notes><![CDATA[ ]]></change-notes>
 
   <depends>com.intellij.modules.platform</depends>
-  <depends>org.rust.lang</depends>
+<!--  <depends>org.rust.lang</depends>-->
   <depends>org.toml.lang</depends>
-  <depends optional="true" config-file="clion.xml">com.intellij.modules.clion</depends>
-  <depends optional="true" config-file="intellij.xml">com.intellij.modules.java</depends>
+<!--  <depends optional="true" config-file="clion.xml">com.intellij.modules.clion</depends>-->
+<!--  <depends optional="true" config-file="intellij.xml">com.intellij.modules.java</depends>-->
 
+  <extensions defaultExtensionNs="com.intellij">
+  <completion.contributor language="TOML" id="embed"
+                          implementationClass="rust.embd.toml.EmbedTomlCompletion"/>
+    <!-- https://crates.io/crates/cargo-embed -->
+    <!-- TODO also json and yaml -->
+    <fileType name="embed" fileNames="Embed.local.toml; .embed.local.toml; Embed.toml;.embed.toml" implementationClass="rust.embd.toml.FileType" />
+
+  </extensions>
   <extensions defaultExtensionNs="com.intellij">
     <moduleType id="rust:embd" implementationClass="rust.embd.module.Type"/>
     <toolWindow id="Console" anchor="bottom" factoryClass="rust.embd.toolwindow.console.Factory"/>
